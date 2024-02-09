@@ -1,0 +1,21 @@
+name: Prod deploy
+env: 
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  Vercel Deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+      - name: Deploy Project Artifacts to Vercel
+        run: vercel deploy --prod --token=${{ secrets.VERCEL_TOKEN }} > deployid
+      - name: Promote to Vercel prod
+        run: DEPLOY_ID=$(cat deployid) && vercel promote ${DEPLOY_ID} --token=${{ secrets.VERCEL_TOKEN }}
