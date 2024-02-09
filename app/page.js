@@ -6,7 +6,7 @@ export default function Home() {
     <main className={styles.main}>
       <div className={styles.description}>
         <p>
-          Get COOL NEW FEATURE started by editing&nbsp;
+          Get COOL NABCEW FEATURE started by editing&nbsp;
           <code className={styles.code}>app/page.js</code>
         </p>
         <div>
